@@ -1,36 +1,61 @@
+
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 
-export default function Login() {
-  const [loginData, setLoginData] = useState({ email: '', password: '' });
+export default function Register() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login Data:', loginData);
+    console.log('Register Data:', formData);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-white to-purple-200 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Welcome User</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Create Account</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email Field */}
-          <div className="relative">
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <div className="flex items-center border border-gray-300 rounded-md px-3">
+              <FiUser className="text-gray-400 mr-2" />
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-2 py-2 outline-none"
+                placeholder="Your full name"
+              />
+            </div>
+          </div>
+
+          {/* Email */}
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <div className="flex items-center border border-gray-300 rounded-md px-3">
               <FiMail className="text-gray-400 mr-2" />
               <input
                 type="email"
                 name="email"
-                value={loginData.email}
+                value={formData.email}
                 onChange={handleChange}
                 required
                 className="w-full px-2 py-2 outline-none"
@@ -39,15 +64,15 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Password Field */}
-          <div className="relative">
+          {/* Password */}
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <div className="flex items-center border border-gray-300 rounded-md px-3">
               <FiLock className="text-gray-400 mr-2" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
-                value={loginData.password}
+                value={formData.password}
                 onChange={handleChange}
                 required
                 className="w-full px-2 py-2 outline-none"
@@ -62,20 +87,20 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Submit Button */}
-          <Link href={'/'}><button
+          {/* Submit */}
+          <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 transition text-white font-semibold py-2 rounded-md"
+            className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 rounded-md transition"
           >
-            Login
-          </button> </Link>
+            Register
+          </button>
         </form>
 
-        {/* Register Link */}
+        {/* Link to Login */}
         <p className="text-sm text-center mt-6 text-gray-600">
-          Don't have an account?{' '}
-          <Link href="/register" className="text-blue-500 hover:underline font-medium">
-            Register here
+          Already have an account?{' '}
+          <Link href="/login" className="text-purple-500 hover:underline font-medium">
+            Login here
           </Link>
         </p>
       </div>

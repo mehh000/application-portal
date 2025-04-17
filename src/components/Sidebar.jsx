@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Sidebar() {
+function Sidebar({ setDynamicCompo }) {
     const menuList = [
-        { id: 1, name: 'Home' },
-        { id: 2, name: 'New Application' },
-        { id: 3, name: 'Histroy' },
-        { id: 4, name: 'Setting' },
+        { id: 1, name: 'Home', component: 'home' },
+        { id: 2, name: 'New Application', component: 'add' },
+        { id: 3, name: 'Histroy', component: 'history' },
+        { id: 4, name: 'Setting', component: 'setting' },
     ]
     return (
         <div className="bg-gray-100 md:flex lg:flex hidden flex-col items-center w-[25%] ">
@@ -15,7 +15,7 @@ function Sidebar() {
                 <div className="w-full px-2">
                     {
                         menuList.map((data) => (
-                            <div className="text-gray-600 hover:text-gray-800 font-medium px-5 py-2 text-lg hover:bg-slate-200  rounded-[8px]" key={data.id}>
+                            <div onClick={() => { setDynamicCompo(data.component) }} className="text-gray-600 hover:text-gray-800 font-medium px-5 py-2 text-lg hover:bg-slate-200  rounded-[8px]" key={data.id}>
                                 {data.name}
                             </div>
                         ))
